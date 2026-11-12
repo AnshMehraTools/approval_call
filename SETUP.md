@@ -41,6 +41,12 @@ Claude Code now asks five questions. Answer them like this:
 
 > **Never paste the API key into a chat with Claude.** Only into this form.
 
+If Claude Code does not show these questions, type this and they will appear:
+
+```
+/plugin configure approval-flow@approval-flow
+```
+
 ## Step 3. Restart
 
 Close Claude Code completely. Open it again in your Hyperframes project folder.
@@ -74,9 +80,9 @@ You work with Claude as you always do.
 | What you see | What to do |
 |---|---|
 | `command not found: ask-approval` | Restart Claude Code. Type `/plugin` and check **approval-flow** is switched on. |
-| Check says the **key was rejected** | Ask your admin for a new key. Then `/plugin`, choose approval-flow, then configure. |
+| Check says the **key was rejected** | Ask your admin for a new key. Then type `/plugin configure approval-flow@approval-flow`. |
 | Claude says **"Python 3 was not found"** | Do Step 1 again, then restart Claude Code. |
-| You typed a number or name wrong | `/plugin`, choose approval-flow, then configure. Fix it, restart. |
+| You typed a number or name wrong, or the form did not appear | Type `/plugin configure approval-flow@approval-flow`. Fix it, then restart. |
 | Anything else | Run `/approval-flow:doctor` and send your admin a screenshot (it shows no secrets). |
 
 ## Keep safe

@@ -46,12 +46,12 @@ def check_settings():
     C.load_runtime_env()
     if not C.RUNTIME_ENV.exists():
         say("FIX", "Your approval settings have not been saved yet",
-            "close and reopen Claude Code. If this stays, open /plugin, choose approval-flow, then configure, and fill in the fields")
+            "close and reopen Claude Code. If this stays, type /plugin configure approval-flow@approval-flow and fill in the fields")
         return False
     good = True
     key = os.environ.get("BIRD_API_KEY", "")
     if not key:
-        say("FIX", "Bird API key is missing", "open /plugin, choose approval-flow, then configure"); good = False
+        say("FIX", "Bird API key is missing", "type /plugin configure approval-flow@approval-flow"); good = False
     elif not key.startswith("bk_"):
         say("FIX", "The Bird API key does not look right (it should start with bk_)", "ask your admin for the key again"); good = False
     else:
@@ -59,17 +59,17 @@ def check_settings():
     for env, label in (("APPROVAL_PHONE", "Approver phone number"), ("BIRD_CALLER_ID", "Caller ID number")):
         v = os.environ.get(env, "")
         if not v:
-            say("FIX", f"{label} is missing", "open /plugin, choose approval-flow, then configure"); good = False
+            say("FIX", f"{label} is missing", "type /plugin configure approval-flow@approval-flow"); good = False
         elif not E164.match(v):
             say("FIX", f"{label} must look like +971501234567 (a plus sign, country code, then the number, no spaces)",
-                "fix it in /plugin, approval-flow, configure"); good = False
+                "fix it with /plugin configure approval-flow@approval-flow"); good = False
         else:
             say("OK", f"{label} is saved ({v[:3]}...{v[-2:]})")
     if os.environ.get("EDITOR_NAME"):
         say("OK", f"Your name for the approver: {os.environ['EDITOR_NAME']}")
     else:
         say("WARN", "No editor name set, so the approver will hear a generic intro",
-            "add your first name in /plugin, approval-flow, configure")
+            "add your first name with /plugin configure approval-flow@approval-flow")
     if not os.environ.get("BIRD_API_URL"):
         say("FIX", "Bird API URL is missing", "use the default https://us1.platform.bird.com"); good = False
     return good
@@ -92,7 +92,7 @@ def check_mode():
 def check_bird():
     s, d = C.api("GET", "/v1/voice/settings", retries=1)
     if s != 200:
-        say("FIX", f"Bird did not accept the API key (HTTP {s})", "ask your admin for a new key, then reconfigure in /plugin")
+        say("FIX", f"Bird did not accept the API key (HTTP {s})", "ask your admin for a new key, then type /plugin configure approval-flow@approval-flow")
         return
     left = ((d.get("daily_spend_limit") or {}).get("remaining") or {}).get("amount")
     say("OK", "Bird accepted the API key" + (f" (daily spend left: ${left})" if left is not None else ""))
