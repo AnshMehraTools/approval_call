@@ -1,0 +1,3 @@
+#!/bin/sh
+# Phone the approver for a keypad answer. See scripts/ask_approval.py for usage and exit codes.
+exec sh "$(dirname "$0")/../scripts/run.sh" ask_approval.py "$@"

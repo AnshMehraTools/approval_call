@@ -1,0 +1,17 @@
+{
+  "name": "approval-flow",
+  "owner": {
+    "name": "AnshMehraTools"
+  },
+  "metadata": {
+    "description": "Phone approval for video-editing decisions made by Claude Code, with a safety gate for Hyperframes projects.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "approval-flow",
+      "description": "Phones the approver for a keypad OK before Claude makes creative or irreversible video-editing decisions, and blocks risky commands until approved. Built for Hyperframes projects.",
+      "source": "./plugins/approval-flow"
+    }
+  ]
+}

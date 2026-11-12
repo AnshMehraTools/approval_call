@@ -1,0 +1,5 @@
+__pycache__/
+.tmp/
+runtime.env
+*.env
+.DS_Store

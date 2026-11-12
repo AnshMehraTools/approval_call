@@ -1,0 +1,8 @@
+{
+  "calls_enabled": false,
+  "approver_timezone": "Asia/Dubai",
+  "quiet_hours": "22-07",
+  "max_per_hour": 4,
+  "grant_ttl_s": 900,
+  "approve_digits": "1"
+}

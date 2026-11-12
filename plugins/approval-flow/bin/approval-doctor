@@ -1,0 +1,3 @@
+#!/bin/sh
+# Check this computer's approval-flow setup. Never places a call. Add --offline to skip the Bird checks.
+exec sh "$(dirname "$0")/../scripts/run.sh" doctor.py "$@"

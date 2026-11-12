@@ -1,0 +1,43 @@
+{
+  "name": "approval-flow",
+  "displayName": "Approval Flow",
+  "version": "0.1.0",
+  "description": "Phones the approver for a keypad OK before Claude makes creative or irreversible video-editing decisions (cuts, deleting footage, final exports, publishing), with a safety gate that blocks risky commands until approved. Built for Hyperframes projects.",
+  "author": {
+    "name": "AnshMehraTools"
+  },
+  "keywords": ["video", "hyperframes", "approval", "voice", "bird"],
+  "userConfig": {
+    "editor_name": {
+      "type": "string",
+      "title": "Your first name",
+      "description": "The approver hears this on the call, for example: Approval request from Priya's video edit.",
+      "required": true
+    },
+    "approver_phone": {
+      "type": "string",
+      "title": "Approver's phone number",
+      "description": "The phone that rings for approvals. Include the plus sign and country code, no spaces. Your admin gives you this.",
+      "required": true
+    },
+    "bird_caller_id": {
+      "type": "string",
+      "title": "Caller ID number",
+      "description": "The number the call comes from. Plus sign and country code, no spaces. Your admin gives you this.",
+      "required": true
+    },
+    "bird_api_key": {
+      "type": "string",
+      "title": "Bird API key",
+      "description": "Starts with bk_. Your admin gives you this. It is stored privately and never shown to Claude.",
+      "required": true,
+      "sensitive": true
+    },
+    "bird_api_url": {
+      "type": "string",
+      "title": "Bird API address",
+      "description": "Leave as it is unless your admin tells you otherwise.",
+      "default": "https://us1.platform.bird.com"
+    }
+  }
+}
