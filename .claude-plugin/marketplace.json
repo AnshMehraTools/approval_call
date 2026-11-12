@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "Phone approval for video-editing decisions made by Claude Code, with a safety gate for Hyperframes projects.",
-    "version": "0.1.0"
+    "version": "0.1.1"
   },
   "plugins": [
     {

@@ -147,6 +147,26 @@ with tempfile.TemporaryDirectory(dir=str(SCRATCH)) as d:
     budget = run(ASK, ["Q?", "A", "B"], env=env(on_policy, APPROVAL_MAX_PER_HOUR="0", APPROVAL_QUIET_HOURS=""))
     check("budget used -> exit 4", (budget.returncode, json.loads(budget.stdout)["reason"]), (4, "hourly_call_budget_used"))
 
+    print("-- network problems are explained, not blamed on the key")
+    import contextlib, importlib.util, io
+    sys.dont_write_bytecode = True
+    sys.path.insert(0, str(SCRIPTS))
+    spec = importlib.util.spec_from_file_location("doctor_mod", str(DOCTOR))
+    dm = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(dm)
+
+    def doctor_says(err):
+        dm.C.api = lambda *a, **k: (0, err)
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            dm.check_bird()
+        return buf.getvalue()
+
+    cert = doctor_says("<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed>")
+    check("certificate error gets the Mac fix", "Install Certificates.command" in cert, True)
+    check("...and is not blamed on the key", "accept the API key" not in cert, True)
+    check("no connection gets an internet hint", "internet connection" in doctor_says("<urlopen error [Errno 8] nodename nor servname>"), True)
+
     print("-- doctor (offline)")
     p = run(DOCTOR, ["--offline"], env=env(on_policy, **opts))
     check("doctor passes the gate self-test", "Safety gate works" in p.stdout, True)

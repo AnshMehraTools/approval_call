@@ -89,8 +89,21 @@ def check_mode():
                 f"quiet hours {C.setting('quiet_hours')}: {'quiet right now, no calls' if quiet else 'calls allowed now'}")
 
 
+def explain_network(err):
+    if "CERTIFICATE_VERIFY_FAILED" in str(err):
+        say("FIX", "Python cannot verify Bird's security certificate",
+            "Mac: open the Python folder inside Applications, double-click 'Install Certificates.command', "
+            "then run this check again. If you are on a company VPN or proxy, ask your IT team.")
+    else:
+        say("FIX", "Could not reach Bird (" + str(err)[:80] + ")",
+            "check your internet connection or VPN, then run this check again")
+
+
 def check_bird():
     s, d = C.api("GET", "/v1/voice/settings", retries=1)
+    if s == 0:
+        explain_network(d)
+        return
     if s != 200:
         say("FIX", f"Bird did not accept the API key (HTTP {s})", "ask your admin for a new key, then type /plugin configure approval-flow@approval-flow")
         return

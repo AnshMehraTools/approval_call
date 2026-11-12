@@ -159,6 +159,10 @@ def one_attempt(spoken_question, options, attempt, run_id, debug_trace=None):
     # One stable key per intended call: a retry of the same attempt can never double-dial.
     key = hashlib.sha256(f"{run_id}:{attempt}:{spoken_question}:{options}".encode()).hexdigest()[:48]
     status, resp = C.api("POST", "/v1/voice/calls", body, idem_key=key)
+    if status == 0:
+        hint = (" On a Mac, open the Python folder in Applications and run 'Install Certificates.command'."
+                if "CERTIFICATE_VERIFY_FAILED" in str(resp) else " Check the internet connection or VPN.")
+        C.die(f"could not reach Bird: {str(resp)[:120]}.{hint}")
     if status not in (200, 202):
         C.die(f"Bird refused the call (HTTP {status}): {resp}")
     leg_id = resp["initial_leg_id"]

@@ -88,7 +88,7 @@ Hyperframes details come from its public docs, which disagree in places on subco
 - **Overlapping calls.** Two editors asking at once ring the approver twice. The spoken intro includes the editor's name so he knows who is asking.
 - **Bird billing.** Calls to the UAE cost about $0.16 each (measured). The daily cap in Bird applies to the whole workspace.
 - **Calling India.** The Indian caller ID we tested was rejected by Indian carriers on international routes. Calls to the UAE and Canada connected. If the approver is ever in India, use a different caller ID.
-- **Windows** is untested. The scripts find `python3`, `python` or `py`, but the first Windows editor should run `/approval-flow:doctor` and report back.
+- **macOS and Windows are untested on real machines** (everything was tested on Linux). The launcher was checked under strict POSIX shells and the scripts under the Python 3.8 grammar. Known Mac traps are covered in SETUP.md (the developer-tools pop-up and the Python certificates step). The first Mac and Windows editors should run `/approval-flow:doctor` and report back.
 
 ## 7. Tests
 

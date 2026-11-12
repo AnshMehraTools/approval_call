@@ -1,7 +1,7 @@
 {
   "name": "approval-flow",
   "displayName": "Approval Flow",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Phones the approver for a keypad OK before Claude makes creative or irreversible video-editing decisions (cuts, deleting footage, final exports, publishing), with a safety gate that blocks risky commands until approved. Built for Hyperframes projects.",
   "author": {
     "name": "AnshMehraTools"

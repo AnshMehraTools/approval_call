@@ -16,6 +16,7 @@ When Claude is about to make a big editing decision (a cut, deleting footage, th
 ## Step 1. Check Python is installed
 
 - **Mac:** open **Terminal**, type `python3 --version`, press Enter.
+  - If a pop-up asks you to install the **command line developer tools**, click **Install** and wait (it can take 10 minutes), or install Python from python.org instead. Then open a new Terminal window and try again.
 - **Windows:** open **PowerShell**, type `python --version`, press Enter.
 
 You should see `Python 3.` and a number. If you see an error instead, install Python from **python.org/downloads** (on Windows, tick **"Add Python to PATH"**), then open a new Terminal or PowerShell.
@@ -81,6 +82,7 @@ You work with Claude as you always do.
 |---|---|
 | `command not found: ask-approval` | Restart Claude Code. Type `/plugin` and check **approval-flow** is switched on. |
 | Check says the **key was rejected** | Ask your admin for a new key. Then type `/plugin configure approval-flow@approval-flow`. |
+| Check says Python **cannot verify Bird's certificate** (Mac) | Open the **Python** folder inside **Applications**, double-click **Install Certificates.command**, then run the check again. |
 | Claude says **"Python 3 was not found"** | Do Step 1 again, then restart Claude Code. |
 | You typed a number or name wrong, or the form did not appear | Type `/plugin configure approval-flow@approval-flow`. Fix it, then restart. |
 | Anything else | Run `/approval-flow:doctor` and send your admin a screenshot (it shows no secrets). |
